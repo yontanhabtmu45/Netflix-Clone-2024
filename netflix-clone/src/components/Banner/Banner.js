@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from "../../utils/axios"
 import requests from "../../utils/requests"
+import "./Banner.css"
 
 const Banner = () => {
 
@@ -8,10 +9,12 @@ const Banner = () => {
     useEffect(() => {
         (async () => {
             try{
+                
                 const request = await axios.get(requests.fetchNetflixOriginals);
-                setMovie(request.data.results[
-                    Math.floor(Math.random() * request.data.results.length)
-                ]);
+                console.log(request);
+                const randomMovie = request.data.results[Math.floor(Math.random() * request.data.results.length)];
+                setMovie(randomMovie);
+                // setMovie(request.data.results[Math.floor(Math.random() * request.data.results.length)]);
             } catch (error) {
                 console.log("error", error);
                 
@@ -24,14 +27,14 @@ const Banner = () => {
     className='banner'
     style={{
         backgroundSize: "cover",
-        backgroundImage: `url('https://image.tmdb.org/t/p/orginal${movie?.backdrop_path}')`,
+        backgroundImage: `url('https://image.tmdb.org/t/p/w500${movie?.backdrop_path}')`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
     }}
     >
         <div className='banner-contents'>
             <h1 className='banner-title'>
-                {movie?.title || movie?.name || movie?.orginal_name}
+                {movie?.title || movie?.name || movie?.original_name}
             </h1>
             <div className='banner-buttons'>
                 <button className='banner-button play'>Play</button>
