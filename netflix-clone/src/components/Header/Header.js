@@ -8,7 +8,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Header = () => {
   return (
-    <div className="header-outter-container">
+    <div className="header-outer-container">
       <div className="header-container">
         <div className="header-left">
           <ul>
