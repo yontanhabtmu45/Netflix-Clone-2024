@@ -4,21 +4,25 @@ import requests from "../../utils/requests"
 import "./Banner.css"
 
 const Banner = () => {
-    const [movie, setMovie] = useState([]);
+    const [movie, setMovie] = useState({});
 	useEffect(() => {
 		async function fetchData() {
 			const request = await axios.get(requests.fetchNetflixOriginals);
             console.log(request);
             
-			// setMovie(
-			// 	request.data.results[
-			// 		Math.floor(Math.random() * request.data.results.length - 1)
-			// 	]
-			// );
+			setMovie(
+				request.data.results[
+					Math.floor(Math.random() * request.data.results.lenght)
+				]
+			);
 			return request;
-		}
-		fetchData();
+		}fetchData();
 	}, []);
+
+    function truncate(str, n) {
+        return str?.lenght > n ? str.substr(0, n - 1) + '...' : str;
+    }
+
 
     return (
         <div 
@@ -38,7 +42,7 @@ const Banner = () => {
                     <button className='banner-button play'>Play</button>
                     <button className='banner-button'>My List</button>
                 </div>
-                {/* <h1 className='banner-description'>{truncate(movie?.overview, 150)}</h1> */}
+                <h1 className='banner-description'>{truncate(movie?.overview, 150)}</h1>
             </div>
             <div className='banner-fadeBottom' />
         </div>
